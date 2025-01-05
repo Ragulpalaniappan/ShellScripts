@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#Write a shell script that renames all .txt files in a directory by appending the current date to the file name
+
+if [ $# -ne 1 ];then
+     echo  "Error:Directory name not provided"
+     exit 1
+fi
+
+if [ ! -d "$1" ];then
+     echo  "Error:Directory: "$1" not exists"
+     exit 1
+fi
+
+current_date=$(date +"%y-%m-%d")
+
+for file in "$1"/*.txt; do
+    if [ -f "$file" ]; then
+        mv "$file" "${file%.txt}_$current_date.txt"
+    fi
+done   
+
+echo "Rename complete."
+
+
